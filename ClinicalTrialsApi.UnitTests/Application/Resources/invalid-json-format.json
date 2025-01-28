@@ -1,0 +1,15 @@
+[
+  {
+    "trialId1": "TR001",
+    "title": "Diabetes Study",
+    "startDate": "2024-01-01",
+    "status": "Not Started",
+    "participants": 3
+  },
+  {
+    "trialId": "TR002",
+    "title": "Diabetes Study",
+    "startDate": "2024-01-01",
+    "endDate": "2024-02-01"
+
+]

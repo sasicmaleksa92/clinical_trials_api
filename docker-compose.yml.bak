@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  webapi:
+    image: ${DOCKER_REGISTRY-}webapi
+    build:
+      context: .
+      dockerfile: RockPaperScissorsLizardSpock.WebApi/Dockerfile
+    ports:
+      - 8080:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Server=mssql;Initial Catalog=rpsls_db;Persist Security Info=False;User ID=sa;Password=zhBg8LjXFAqWasTA;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=5;
+      
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    container_name: mssql
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=zhBg8LjXFAqWasTA
+    ports:
+      - 1434:1434
+  

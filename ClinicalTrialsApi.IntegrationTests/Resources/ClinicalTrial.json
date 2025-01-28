@@ -1,0 +1,24 @@
+[
+  {
+    "trialId": "TR001",
+    "title": "Diabetes Study",
+    "startDate": "2024-01-01",
+    "status": "Not Started",
+    "participants": 3
+  },
+  {
+    "trialId": "TR002",
+    "title": "Cardiovascular Health Study",
+    "startDate": "2024-01-01",
+    "endDate": "2024-02-01",
+    "status": "Completed",
+    "participants": 4
+  },
+  {
+    "trialId": "TR003",
+    "title": "Cancer Treatment Trial",
+    "startDate": "2024-01-01",
+    "status": "Ongoing",
+    "participants": 5
+  }
+]
