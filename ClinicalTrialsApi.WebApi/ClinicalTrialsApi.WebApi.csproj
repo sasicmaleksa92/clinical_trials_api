@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClinicalTrials.Application\ClinicalTrials.Application.csproj" />
+    <ProjectReference Include="..\ClinicalTrials.Domain\ClinicalTrials.Domain.csproj" />
     <ProjectReference Include="..\ClinicalTrials.Infrastructure\ClinicalTrials.Infrastructure.csproj" />
   </ItemGroup>
 

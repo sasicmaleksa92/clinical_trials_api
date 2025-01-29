@@ -1,5 +1,5 @@
-﻿using ClinicalTrials.Domain.Enums;
-using ClinicalTrialsApi.WebApi.Converters;
+﻿using ClinicalTrials.Application.Converters;
+using ClinicalTrials.Domain.Enums;
 using System.Text.Json.Serialization;
 
 namespace ClinicalTrials.Application.Dtos

@@ -1,4 +1,4 @@
-﻿using ClinicalTrialsApi.WebApi.Configuration;
+﻿using ClinicalTrials.Domain.Configuration;
 
 namespace ClinicalTrialsApi.WebApi.Middlewares
 {
@@ -10,9 +10,10 @@ namespace ClinicalTrialsApi.WebApi.Middlewares
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context, ConfigurationService configurationService)
+        public async Task InvokeAsync(HttpContext context)
         {
-            var maxFileSize = configurationService.MaxFileSizeInMb * 1024 * 1024;
+            var maxFileSizeInMb = Configuration.AppSettings.MaxFileSizeInMb;
+            var maxFileSize = maxFileSizeInMb * 1024 * 1024;
 
             if (context.Request.ContentType?.StartsWith("multipart/form-data") == true)
             {
@@ -23,7 +24,7 @@ namespace ClinicalTrialsApi.WebApi.Middlewares
                     if (file.Length > maxFileSize)
                     {
                         context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                        await context.Response.WriteAsync($"File size exceeds the limit of {configurationService.MaxFileSizeInMb} MB.");
+                        await context.Response.WriteAsync($"File size exceeds the limit of {maxFileSizeInMb} MB.");
                         return;
                     }
                 }

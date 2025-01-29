@@ -3,6 +3,7 @@ using ClinicalTrials.Application.Common.FileProcessing;
 using ClinicalTrials.Application.Common.ResultPattern;
 using ClinicalTrials.Application.Dtos;
 using ClinicalTrials.Application.Interfaces.Repositories;
+using ClinicalTrials.Domain.Configuration;
 using ClinicalTrials.Domain.Entities;
 using MediatR;
 
@@ -23,9 +24,9 @@ namespace ClinicalTrials.Application.UseCases.ClinicalTrials.Commands.CreateClin
 
         public async Task<Result<List<ClinicalTrialResponseDto>>> Handle(CreateClinicalTrialCommand request, CancellationToken cancellationToken)
         {
-            //Aleksa
+
             var fileProcessingResult = await _jsonFileProcessor.ProcessFileAsync(request.ClinicalTrialFile.OpenReadStream(),
-                "ClinicalTrials.Application.Resources.ClinicalTrialJsonScheme.json");
+                Configuration.AppSettings.UploadClinicalTrialFileJsonSchemaFileName);
 
             if (!fileProcessingResult.IsSuccess)
             {

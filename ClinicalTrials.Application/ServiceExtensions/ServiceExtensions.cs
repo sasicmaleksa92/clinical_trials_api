@@ -22,7 +22,6 @@ namespace ClinicalTrials.Application.ServiceExtensions
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-            //Aleksa
             services.AddScoped(typeof(JsonFileProcessor<>));
             services.AddScoped(typeof(JsonSchemaValidator));
             services.AddScoped<IFileReader, EmbeddedResourceReader>();

@@ -1,4 +1,8 @@
-﻿namespace ClinicalTrials.Application.Dtos
+﻿using ClinicalTrials.Application.Converters;
+using ClinicalTrials.Domain.Enums;
+using System.Text.Json.Serialization;
+
+namespace ClinicalTrials.Application.Dtos
 {
     public class ClinicalTrialResponseDto
     {

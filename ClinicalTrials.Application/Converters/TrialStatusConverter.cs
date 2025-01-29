@@ -2,7 +2,7 @@
 using System.Text.Json;
 using ClinicalTrials.Domain.Enums;
 
-namespace ClinicalTrialsApi.WebApi.Converters
+namespace ClinicalTrials.Application.Converters
 {
     public class TrialStatusConverter : JsonConverter<ClinicalTrialStatusEnum>
     {

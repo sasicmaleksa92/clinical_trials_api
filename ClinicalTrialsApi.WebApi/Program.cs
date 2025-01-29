@@ -1,4 +1,5 @@
 using ClinicalTrials.Application.ServiceExtensions;
+using ClinicalTrials.Domain.Configuration;
 using ClinicalTrials.Infrastructure.Persistance.Context;
 using ClinicalTrials.Infrastructure.ServiceExtensions;
 using ClinicalTrialsApi.WebApi.ConfigurationExtensions;
@@ -24,10 +25,11 @@ builder.Services.AddSwaggerGen(config =>
 });
 
 var app = builder.Build();
-app.UseExceptionHandler();
 
-//Aleksa
+Configuration.SetConfiguration(app.Configuration);
+app.UseExceptionHandler();
 app.UseMiddleware<FileUploadMiddleware>();
+
 //EF Core migrations
 using (var serviceScope = app.Services.CreateScope())
 {

@@ -1,5 +1,4 @@
-﻿using ClinicalTrialsApi.WebApi.Configuration;
-using ClinicalTrialsApi.WebApi.Middlewares;
+﻿using ClinicalTrialsApi.WebApi.Middlewares;
 
 namespace ClinicalTrialsApi.WebApi.ServiceExtensions
 {
@@ -14,7 +13,6 @@ namespace ClinicalTrialsApi.WebApi.ServiceExtensions
 
             services.AddExceptionHandler<GlobalExceptionHandler>();
             services.AddProblemDetails();
-            services.AddScoped<ConfigurationService>();
 
             return services;
         }

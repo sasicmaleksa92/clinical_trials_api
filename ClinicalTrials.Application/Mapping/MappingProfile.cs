@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ClinicalTrials.Application.Dtos;
+using ClinicalTrials.Domain.Common.Extensions;
 using ClinicalTrials.Domain.Entities;
 
 namespace ClinicalTrials.Application.Mapping
@@ -11,7 +12,8 @@ namespace ClinicalTrials.Application.Mapping
             CreateMap<ClinicalTrialDto, ClinicalTrial>()
                 .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => MapEndDate(src)));
 
-            CreateMap<ClinicalTrial, ClinicalTrialResponseDto>();
+            CreateMap<ClinicalTrial, ClinicalTrialResponseDto>()
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.GetDescription()));
 
         }
 

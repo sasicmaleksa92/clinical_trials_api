@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace ClinicalTrials.Application.Common.PredicateBuilder
+namespace ClinicalTrials.Domain.Common.Extensions
 {
     public static class PredicateBuilder
     {

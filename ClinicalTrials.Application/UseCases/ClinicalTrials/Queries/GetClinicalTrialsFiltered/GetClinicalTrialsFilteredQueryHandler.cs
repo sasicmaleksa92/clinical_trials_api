@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using ClinicalTrials.Application.Common.PredicateBuilder;
 using ClinicalTrials.Application.Common.ResultPattern;
 using ClinicalTrials.Application.Dtos;
 using ClinicalTrials.Application.Interfaces.Repositories;
+using ClinicalTrials.Domain.Common.Extensions;
 using ClinicalTrials.Domain.Entities;
 using ClinicalTrials.Domain.Enums;
 using MediatR;
@@ -23,14 +23,14 @@ namespace ClinicalTrials.Application.UseCases.ClinicalTrials.Queries.GetClinical
 
         public async Task<Result<List<ClinicalTrialResponseDto>>> Handle(GetFilteredClinicalTrialsQuery request, CancellationToken cancellationToken)
         {
-            
+
             if (CheckIfAllPropertiesAreNull(request))
             {
                 return Result<List<ClinicalTrialResponseDto>>.Failure("At least one filter must be provided.");
             }
 
             var filter = BuildFilterExpression(request);
-            var clinicalTrialEntities = await _repository.GetAsync(filter: filter); 
+            var clinicalTrialEntities = await _repository.GetAsync(filter: filter);
 
             if (!clinicalTrialEntities.Any())
             {
@@ -43,6 +43,7 @@ namespace ClinicalTrials.Application.UseCases.ClinicalTrials.Queries.GetClinical
 
         }
 
+        #region Helper Methods
         private bool CheckIfAllPropertiesAreNull(GetFilteredClinicalTrialsQuery request)
         {
             // Use reflection to check if all properties of the request are null
@@ -58,11 +59,14 @@ namespace ClinicalTrials.Application.UseCases.ClinicalTrials.Queries.GetClinical
             Expression<Func<ClinicalTrial, bool>> filter = x => true;
 
             // Dynamically build the filter expression based on the input
-            if(request.Title != null)
+            if (request.Title != null)
                 filter = filter.And(x => x.Title == request.Title);
 
-            if (request.Status != null && Enum.TryParse(request.Status, out ClinicalTrialStatusEnum status))
-                filter = x => x.Status == status;
+            if (request.Status != null)
+            {
+                var status = request.Status.GetEnumByDescription<ClinicalTrialStatusEnum>();
+                filter = filter.And(x => x.Status == status);
+            }
 
             if (request.StartDate != null)
                 filter = filter.And(x => x.StartDate == request.StartDate);
@@ -75,5 +79,6 @@ namespace ClinicalTrials.Application.UseCases.ClinicalTrials.Queries.GetClinical
 
             return filter;
         }
+        #endregion
     }
 }

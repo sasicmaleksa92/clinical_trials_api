@@ -6,7 +6,6 @@ namespace ClinicalTrials.Application.Interfaces.Repositories
     {
         Task<T?> GetFirstAsync(Expression<Func<T, bool>> filter);
 
-        //Aleksa
         Task<List<T>> GetAsync(
            string includeProperties = "",
            Expression<Func<T, bool>> filter = null);
